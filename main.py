@@ -1,9 +1,10 @@
 import discord
 import json
 
-import message_event as MessageEvent
+from message_event import MessageEventHandler
 
 bot = discord.Client()
+message_event_handler = MessageEventHandler()
 
 with open("config.json") as file:
     config = json.load(file)
@@ -14,6 +15,6 @@ async def on_ready():
 
 @bot.event
 async def on_message(message):
-    await MessageEvent.handle_message_event(bot, message)
+    await message_event_handler.handle(bot, message)
 
 bot.run(config["id"])

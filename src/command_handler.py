@@ -1,6 +1,7 @@
 import discord
 
 from command import Command
+from basic_commands import BasicCommandHandler
 
 class CommandHandler:
     def __init__(self):
@@ -23,17 +24,3 @@ class CommandHandler:
         for handler in self.command_handlers:
             if await handler.try_execute(bot, channel, command, args):
                 return
-
-class BasicCommandHandler:
-    def __init__(self):
-        self.name = "Basic"
-        self.basic_commands = [
-            Command("source", ">source", "Gets a link to the source code of this bot", "https://github.com/Portsmouth-Computing/Uop-SoC-Bot")
-        ]
-
-    async def try_execute(self, bot: discord.Client, channel: discord.Channel, command: str, args: [str]):
-        print("TRYING")
-        for cmd in self.basic_commands:
-            print (">" + command + "< >" + cmd.name + "<")
-            if (cmd.name == command):
-                await bot.send_message(channel, cmd.output)

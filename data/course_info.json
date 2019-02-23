@@ -1,0 +1,15 @@
+{
+    "deadlines": {
+        "inse": [
+            ["Prototype", "05/04/2019"],
+            ["Final Submission", "10/05/2019"]
+        ]
+    },
+    "exams": {
+        "inse": {
+            "cw": 50,
+            "ex": 50
+        }
+    }
+}
+

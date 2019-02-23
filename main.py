@@ -12,6 +12,9 @@ with open("config.json") as file:
 @bot.event
 async def on_ready():
     print("Bot is now active")
+    game = discord.Game()
+    game.name = "Type '>help'"
+    await bot.change_presence(game = game)
 
 @bot.event
 async def on_message(message):

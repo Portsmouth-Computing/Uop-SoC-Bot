@@ -8,8 +8,8 @@ class MessageEventHandler:
     async def handle(self, bot: discord.Client, message: discord.Message):
         content = message.content
         channel = message.channel
-        #The "!" character in a mesage indicates it is a command
-        if content.startswith("!"):
+        #The ">" character in a mesage indicates it is a command
+        if content.startswith(">"):
                 content = content[1:]
                 args    = content.split(" ")
                 command = args[0]

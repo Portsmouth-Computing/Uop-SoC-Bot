@@ -13,7 +13,7 @@ class CommandHandler:
             output = discord.Embed()
             output.title = "UoP Bot Help"
             for handler in self.command_handlers:
-                for command in handler.basic_commands:
+                for command in handler.basic_commands + handler.commands:
                     val =  "Description: " + command.description + "\n"
                     val += "Example: " + command.example
                     output.add_field(name = command.name, value = val)

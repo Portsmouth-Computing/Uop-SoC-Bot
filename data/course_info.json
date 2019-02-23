@@ -3,12 +3,37 @@
         "inse": [
             ["Prototype", "05/04/2019"],
             ["Final Submission", "10/05/2019"]
+        ],
+        "webscrpt": [
+            ["Web Application", "03/05/2019"]
+        ],
+        "gude": [
+            ["Prototype UI and Report", "29/04/2019"]
+        ],
+        "mathfun": [
+            ["Haskell Coursework", "0/0/0"]
         ]
     },
     "exams": {
         "inse": {
             "cw": 50,
             "ex": 50
+        },
+        "webscrpt": {
+            "cw": 100,
+            "ex": 0
+        },
+        "adproc": {
+            "cw": 40,
+            "ex": 60
+        },
+        "gude": {
+            "cw": 100,
+            "ex": 0
+        },
+        "mathfun": {
+            "cw": 40,
+            "ex": 60
         }
     }
 }

@@ -11,7 +11,7 @@ class BasicCommandHandler:
         ]
         self.commands = [
            Command("deadline", ">deadline inse", "Gets all deadlines for a module", deadline),
-           Command("exam", ">exam inse", "Gets th exam/coursework weighting for a module", exam) 
+           Command("exam", ">exam inse", "Gets the Exam/ Coursework weighting split for a module", exam) 
         ]
 
     async def try_execute(self, bot, channel, command, args):
@@ -30,16 +30,17 @@ class BasicCommandHandler:
         return False
         
 
-def get_course_info():
+def get_course_info(detail, unit):
     with open("data/course_info.json") as file:
-        info = json.load(file)
-    return info
+        info = json.load(file)[detail]
+    if unit in info:
+        return info[unit]
+    return None
 
 async def deadline(bot, channel, command, args):
     unit = args[0] 
-    deadlines = get_course_info()["deadlines"]
-    if unit in deadlines:
-        deadlines = deadlines[unit]
+    deadlines = get_course_info("deadlines", unit)
+    if deadlines:
         output = discord.Embed() 
         output.title = "Deadlines for unit: " + unit.upper()
         for dl in deadlines:
@@ -48,10 +49,8 @@ async def deadline(bot, channel, command, args):
 
 async def exam(bot, channel, command, args):
     unit = args[0] 
-    exams = get_course_info()["exams"]
-    if unit in exams:
-        exams = exams[unit]
-        print(exams)
+    exams = get_course_info("exams", unit)
+    if exams:
         output = discord.Embed() 
         output.title = "Exam/Coursework split for unit: "  + unit.upper()
         output.add_field(name = "Exam",         value = str(exams["ex"]) + "%", inline = True)

@@ -4,6 +4,7 @@ import json
 from command import Command
 
 class BasicCommandHandler:
+    '''Commands that are simple and do not require a prefix'''
     def __init__(self):
         self.name = "Basic"
         self.basic_commands = [
@@ -15,7 +16,8 @@ class BasicCommandHandler:
         ]
 
     async def try_execute(self, bot, channel, command, args):
-        #TODO Generalise this
+        '''Attempts to execute a command, if it exists. Returns false if a command does not exist'''
+        #TODO Generalise these loops somehow
         for cmd in self.basic_commands:
             if (cmd.name == command):
                 await bot.send_message(channel, cmd.output)
@@ -31,6 +33,7 @@ class BasicCommandHandler:
         
 
 def get_course_info(detail, unit):
+    '''Gets basic info for a unit based on the detail, eg deadline or exam'''
     with open("data/course_info.json") as file:
         info = json.load(file)[detail]
     if unit in info:
@@ -38,6 +41,7 @@ def get_course_info(detail, unit):
     return None
 
 async def deadline(bot, channel, command, args):
+    '''Command function for getting the coursework deadline dates for a module'''
     unit = args[0] 
     deadlines = get_course_info("deadlines", unit)
     if deadlines:
@@ -48,6 +52,7 @@ async def deadline(bot, channel, command, args):
         await bot.send_message(channel, embed = output)
 
 async def exam(bot, channel, command, args):
+    '''Command function for getting the coursework/ exam split of a module'''
     unit = args[0] 
     exams = get_course_info("exams", unit)
     if exams:

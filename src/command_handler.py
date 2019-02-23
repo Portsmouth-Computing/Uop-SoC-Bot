@@ -1,12 +1,6 @@
 import discord
 
-class Command:
-    def __init__(self, name, example, description, output):
-        self.name = name
-        self.example = example
-        self.description = description
-        self.output = output
-
+from command import Command
 
 class CommandHandler:
     def __init__(self):

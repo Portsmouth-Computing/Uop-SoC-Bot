@@ -50,9 +50,11 @@ async def deadline(bot, channel, command, args):
         output = discord.Embed() 
         output.title = "Deadlines for unit: " + unit.upper()
         for dl in deadlines:
+            #Get the dates
             date = list(map(int, dl[1].split("/")))
             date = Date(date[2], date[1], date[0])
             today = datetime.now().date()
+            #Make the dates as fields
             output.add_field(
                 name = "Name: " + dl[0], 
                 value = f"Deadline: {dl[1]}\nDays left: {str((date - today).days)}", inline = False)

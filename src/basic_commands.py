@@ -1,6 +1,8 @@
 import discord 
 import json
 
+from datetime import date as Date, datetime
+
 from command import Command
 
 class BasicCommandHandler:
@@ -48,7 +50,12 @@ async def deadline(bot, channel, command, args):
         output = discord.Embed() 
         output.title = "Deadlines for unit: " + unit.upper()
         for dl in deadlines:
-            output.add_field(name = "Name: " + dl[0], value = "Deadline: " + dl[1])
+            date = list(map(int, dl[1].split("/")))
+            date = Date(date[2], date[1], date[0])
+            today = datetime.now().date()
+            output.add_field(
+                name = "Name: " + dl[0], 
+                value = f"Deadline: {dl[1]}\nDays left: {str((date - today).days)}", inline = False)
         await bot.send_message(channel, embed = output)
 
 async def exam(bot, channel, command, args):
@@ -58,8 +65,14 @@ async def exam(bot, channel, command, args):
     if exams:
         output = discord.Embed() 
         output.title = "Exam/Coursework split for unit: "  + unit.upper()
-        output.add_field(name = "Exam",         value = str(exams["ex"]) + "%", inline = True)
-        output.add_field(name = "Coursework",   value = str(exams["cw"]) + "%", inline = True)
+        output.add_field(
+            name = "Exam",         
+            value = str(exams["ex"]) + "%", 
+            inline = True)
+        output.add_field(
+            name = "Coursework",   
+            value = str(exams["cw"]) + "%", 
+            inline = True)
         await bot.send_message(channel, embed = output)
 
         

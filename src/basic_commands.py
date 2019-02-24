@@ -17,23 +17,6 @@ class BasicCommandHandler:
            Command("exam", ">exam inse", "Gets the Exam/ Coursework weighting split for a module", exam) 
         ]
 
-    async def try_execute(self, bot, channel, command, args):
-        '''Attempts to execute a command, if it exists. Returns false if a command does not exist'''
-        #TODO Generalise these loops somehow
-        for cmd in self.basic_commands:
-            if (cmd.name == command):
-                await bot.send_message(channel, cmd.output)
-                return True
-        if len(args) < 1: 
-            return False
-        for cmd in self.commands:
-            if (cmd.name == command):
-                args = args[1:]
-                await cmd.output(bot, channel, command, args)
-                return True
-        return False
-        
-
 def get_course_info(detail, unit):
     '''Gets basic info for a unit based on the detail, eg deadline or exam'''
     with open("data/course_info.json") as file:

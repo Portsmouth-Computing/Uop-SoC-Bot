@@ -22,5 +22,21 @@ class CommandHandler:
 
         #Other commands
         for handler in self.command_handlers:
-            if await handler.try_execute(bot, channel, command, args):
+            if await try_execute(handler, bot, channel, command, args):
                 return
+
+async def try_execute(command_handler, bot, channel, command, args):
+    '''Attempts to execute a command, if it exists. Returns false if a command does not exist'''
+    #TODO Generalise these loops somehow
+    for cmd in command_handler.basic_commands:
+        if (cmd.name == command):
+            await bot.send_message(channel, cmd.output)
+            return True
+    if len(args) < 1: 
+        return False
+    for cmd in command_handler.commands:
+        if (cmd.name == command):
+            args = args[1:]
+            await cmd.output(bot, channel, command, args)
+            return True
+    return False

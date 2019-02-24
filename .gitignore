@@ -1,4 +1,7 @@
 config.json
+levels.json
 
 .vscode/
 __pycache__/
+
+data/levels.jsob

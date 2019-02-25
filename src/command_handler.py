@@ -2,10 +2,11 @@ import discord
 
 from command import Command
 from basic_commands import BasicCommandHandler
+from level_commands import LevelCommandHandler
 
 class CommandHandler:
     def __init__(self):
-        self.command_handlers = [BasicCommandHandler()]
+        self.command_handlers = [BasicCommandHandler(), LevelCommandHandler()]
 
     async def handle(self, bot: discord.Client, channel: discord.Channel, command: str, args: [str], member):
         #Help command

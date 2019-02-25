@@ -25,7 +25,7 @@ def get_course_info(detail, unit):
         return info[unit]
     return None
 
-async def deadline(bot, channel, command, args):
+async def deadline(bot, channel, command, args, member):
     '''Command function for getting the coursework deadline dates for a module'''
     unit = args[0] 
     deadlines = get_course_info("deadlines", unit)
@@ -43,7 +43,7 @@ async def deadline(bot, channel, command, args):
                 value = f"Deadline: {dl[1]}\nDays left: {str((date - today).days)}", inline = False)
         await bot.send_message(channel, embed = output)
 
-async def exam(bot, channel, command, args):
+async def exam(bot, channel, command, args, member):
     '''Command function for getting the coursework/ exam split of a module'''
     unit = args[0] 
     exams = get_course_info("exams", unit)

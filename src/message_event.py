@@ -17,5 +17,5 @@ class MessageEventHandler:
                 content = content[1:]
                 args    = content.split(" ")
                 command = args[0]
-                await self.command_handler.handle(bot, channel, command, args)
+                await self.command_handler.handle(bot, channel, command, args, member)
         await level_system.update(bot, channel, member, content)

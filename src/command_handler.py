@@ -7,7 +7,7 @@ class CommandHandler:
     def __init__(self):
         self.command_handlers = [BasicCommandHandler()]
 
-    async def handle(self, bot: discord.Client, channel: discord.Channel, command: str, args: [str]):
+    async def handle(self, bot: discord.Client, channel: discord.Channel, command: str, args: [str], member):
         #Help command
         if command == "help":
             output = discord.Embed()
@@ -22,10 +22,10 @@ class CommandHandler:
 
         #Other commands
         for handler in self.command_handlers:
-            if await try_execute(handler, bot, channel, command, args):
+            if await try_execute(handler, bot, channel, command, args, member):
                 return
 
-async def try_execute(command_handler, bot, channel, command, args):
+async def try_execute(command_handler, bot, channel, command, args, member):
     '''Attempts to execute a command, if it exists. Returns false if a command does not exist'''
     #TODO Generalise these loops somehow
     for cmd in command_handler.basic_commands:
@@ -37,6 +37,6 @@ async def try_execute(command_handler, bot, channel, command, args):
     for cmd in command_handler.commands:
         if (cmd.name == command):
             args = args[1:]
-            await cmd.output(bot, channel, command, args)
+            await cmd.output(bot, channel, command, args, member)
             return True
     return False
